@@ -1,8 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 let Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // runs on inital render and each when state change in this component
+  useEffect(() => {
+    document.title ="Login - eCommerce";
+    console.log("Runs Ever Time");
+  });
+
+  // runs on intital render as well as on everytime state change
+  useEffect(() => {
+    if(email.indexOf("@") > 0){
+      console.log("valid");
+    }
+    else{
+      console.log("invalid");
+    }
+  },[email,password]);
+
+  // runs on inital render time and its same as componentDidMount()
+  useEffect(()=>{
+    console.log("Inital Render");
+  },[]);
+
+  // renders on component unmount phase
+  useEffect( ()=> {
+    return () => {
+      console.log("ComponentWillMount");
+    };
+  },[]);
 
   return (
     <div className="row">
